@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package user;
+
+import "user/user.proto";
+
+service UsersService {
+
+    /*** Create a new User a post procedure **/
+    rpc CreateUser (user.CreateUserDto) returns (user.User) {}
+
+    /********** Get All Listed Users **************/
+
+    rpc FindAllUsers (user.Empty) returns (user.Users) {}
+
+    /*********** Get a single user by id ************/
+
+    rpc FindOneUser (user.FindOneUserDto) returns (user.User) {}
+
+    /*************  Update a user ****************/
+    
+    rpc UpdateUser (user.UpdateUserDto) returns (user.User) {}
+
+    /************** Delete a single User by id ******************/
+    
+    rpc RemoveUser (user.FindOneUserDto) returns (user.User) {}
+
+    /***************** Return a large amount of User data, return a stream *********************************/
+    rpc QueryUsers (stream user.PaginationDto) returns (stream user.Users) {}
+
+}

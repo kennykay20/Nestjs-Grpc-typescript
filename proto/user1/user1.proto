@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package user;
+
+service UsersService {
+
+    /*** Create a new User a post procedure **/
+    rpc CreateUser (CreateUserDto) returns (User) {}
+
+    /********** Get All Listed Users **************/
+
+    rpc FindAllUsers (Empty) returns (Users) {}
+
+    /*********** Get a single user by id ************/
+
+    rpc FindOneUser (FindOneUserDto) returns (User) {}
+
+    /*************  Update a user ****************/
+    
+    rpc UpdateUser (UpdateUserDto) returns (User) {}
+
+    /************** Delete a single User by id ******************/
+    
+    rpc RemoveUser (FindOneUserDto) returns (User) {}
+
+    /***************** Return a large amount of User data, return a stream *********************************/
+    rpc QueryUsers (stream PaginationDto) returns (stream Users) {}
+
+}
+
+message CreateUserDto {
+    string username = 1;
+    string password = 2;
+    int32 age = 3;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string password = 3;
+    int32 age = 4;
+    bool subscribed = 5;
+    SocialMedia social_media = 6;
+}
+
+message SocialMedia {
+    optional string twitter_url = 1;
+    optional string fb_url = 2;
+}
+
+message Empty {};
+
+message Users {
+    repeated User users = 1;
+}
+
+message FindOneUserDto {
+    string id = 1;
+}
+
+message UpdateUserDto {
+    string id = 1;
+    SocialMedia social_media = 2;
+    string username = 3;
+    string password = 4;
+}
+
+message PaginationDto {
+    int32 page = 1;
+    int32 skip = 2;
+}

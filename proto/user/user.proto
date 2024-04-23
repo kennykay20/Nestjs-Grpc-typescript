@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package user;
+
+message CreateUserDto {
+    string username = 1;
+    string password = 2;
+    int32 age = 3;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string password = 3;
+    int32 age = 4;
+    bool subscribed = 5;
+    SocialMedia social_media = 6;
+}
+
+message SocialMedia {
+    optional string twitter_url = 1;
+    optional string fb_url = 2;
+}
+
+message Empty {};
+
+message Users {
+    repeated User users = 1;
+}
+
+message FindOneUserDto {
+    string id = 1;
+}
+
+message UpdateUserDto {
+    string id = 1;
+    SocialMedia social_media = 2;
+}
+
+message PaginationDto {
+    int32 page = 1;
+    int32 skip = 2;
+}
